@@ -24,6 +24,8 @@ exports.symboleCloseParenthese = "closeParenthese";
 exports.typeNumber = "number";
 exports.typeWord = "word";
 exports.typeTypeHint= 'typeHint';
+exports.typeIndent= 'indent';
+
 
 
 exports.errorNoTokenFound = 'No Tokens Found.';

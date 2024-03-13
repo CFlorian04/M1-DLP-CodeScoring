@@ -21,7 +21,6 @@ exports.numberLine = (ast) => {
     let nb = 1;
     ast.forEach((e) => { 
         if (e.type == 'newLine') {
-            console.log(e); 
             nb++; 
         }
     });

@@ -10,14 +10,19 @@ module.exports = (tokens) => {
         if (tokens[i].type == constTokens.typeWord && constParser.declarationVariable.indexOf(tokens[i].value) != -1) {
             expression = factory.create(constParser.expressionDeclaration, tokens, i);
             i++;
-            //utilisation symbole égale
+
+        } else if (tokens[i].type == constTokens.typeIndent)
+        {
+            expression = factory.create(constParser.expressionIndent, tokens, i)
+
+            i = i + expression.quantity-1;
+        //Declaration de fonction
         } else if (tokens[i].type == constTokens.typeWord && constParser.declarationFunction.indexOf(tokens[i].value) != -1)
         {
-            //console.log("--- Construction Fonctions ---")
             expression = factory.create(constParser.expressionFunctionDeclaration, tokens, i)
-
             i = expression.end;
-            
+
+        //utilisation symbole égale    
         } else if (tokens[i].type == constTokens.symboleEqual) {
             expression = factory.create(constParser.expressionAffectation, tokens, i);
             //si affectation nombre

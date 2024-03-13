@@ -12,6 +12,8 @@ exports.create= (type, tokens, start)=>{
             return variableAffectation(tokens, start);
         case constParser.expressionFunctionDeclaration:
             return functionDeclaration(tokens, start);
+        case constParser.expressionIndent:
+            return expressionIndent(tokens, start);
     }
 }
 
@@ -49,19 +51,35 @@ function functionDeclaration(tokens, start){
     if(tokens[start+2].type != constTokens.symboleOpenParenthese) throw constParser.errorMissingOpenParenthesis;
 
     let arguments = helper.searchArgs(tokens, start+2);
-    nbArg = 2*arguments.args.length -1;
+    startAndArg = 2*arguments.args.length -1;
 
-    if(tokens[start+nbArg+3].type != constTokens.symboleCloseParenthese) throw constParser.errorMissingCloseParenthesis;
+    if(tokens[startAndArg+3].type != constTokens.symboleCloseParenthese) throw constParser.errorMissingCloseParenthesis;
 
-    console.log("Hint", tokens[start+nbArg+4].type);
-    if(tokens[start+nbArg+4].type == constTokens.typeTypeHint)
+    if(tokens[startAndArg+4].type == constTokens.typeTypeHint)
     {
-        if(tokens[start+nbArg+5].type != constTokens.typeWord) throw constParser.errorMissingWord;
+        if(tokens[startAndArg+5].type != constTokens.typeWord) throw constParser.errorMissingWord;
     
-        functionTypeInt = tokens[start+nbArg+5].value;
+        functionTypeInt = tokens[startAndArg+5].value;
+
+        if(tokens[startAndArg+6].type != constTokens.symboleColon) throw constParser.errorMissingColon;
+
+        tokenEnd = startAndArg+6;
+    }
+    else
+    {
+        if(tokens[startAndArg+4].type != constTokens.symboleColon) throw constParser.errorMissingColon;
+
+        tokenEnd = startAndArg+4;
     }
 
-    if(tokens[start+nbArg+6].type != constTokens.symboleColon) throw constParser
+    return {type: constParser.expressionFunctionDeclaration, functionName: functionName, functionTypeInt: functionTypeInt, functionArgs : arguments.args, start:start, end: tokenEnd};
+}
 
-    return {type: constParser.expressionFunctionDeclaration, functionName: functionName, functionTypeInt: functionTypeInt, functionArgs : arguments.args, end: start+nbArg+6};
+
+function expressionIndent(tokens, start)
+{
+    let i = 1;
+    while (tokens[start+i].type == constTokens.typeIndent) { i++ }
+
+    return {type: constParser.expressionIndent, quantity: i, start:start, end:start+i-1}
 }

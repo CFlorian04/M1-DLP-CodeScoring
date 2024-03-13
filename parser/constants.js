@@ -5,6 +5,7 @@ exports.typeString= 'string';
 exports.expressionDeclaration= "variableDeclaration";
 exports.expressionAffectation= "variableAffectation";
 exports.expressionFunctionDeclaration = "functionDeclaration";
+exports.expressionIndent = "indentNumber";
 exports.expressionMethodCall= "objectMethodCall";
 
 exports.declarationVariable = ["var","let", "const"];
