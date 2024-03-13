@@ -46,12 +46,12 @@ function variableAffectation(tokens, start){
 function functionDeclaration(tokens, start){
     if(tokens[start+1].type != constTokens.typeWord) throw constParser.errorMissingWord;
     let functionName = tokens[start+1].value;
-    let functionTypeInt = null; 
+    let functionTypeHint = null; 
 
     if(tokens[start+2].type != constTokens.symboleOpenParenthese) throw constParser.errorMissingOpenParenthesis;
 
     let arguments = helper.searchArgs(tokens, start+2);
-    startAndArg = 2*arguments.args.length -1;
+    startAndArg = start + 2*arguments.args.length -1;
 
     if(tokens[startAndArg+3].type != constTokens.symboleCloseParenthese) throw constParser.errorMissingCloseParenthesis;
 
@@ -59,7 +59,7 @@ function functionDeclaration(tokens, start){
     {
         if(tokens[startAndArg+5].type != constTokens.typeWord) throw constParser.errorMissingWord;
     
-        functionTypeInt = tokens[startAndArg+5].value;
+        functionTypeHint = tokens[startAndArg+5].value;
 
         if(tokens[startAndArg+6].type != constTokens.symboleColon) throw constParser.errorMissingColon;
 
@@ -72,7 +72,8 @@ function functionDeclaration(tokens, start){
         tokenEnd = startAndArg+4;
     }
 
-    return {type: constParser.expressionFunctionDeclaration, functionName: functionName, functionTypeInt: functionTypeInt, functionArgs : arguments.args, start:start, end: tokenEnd};
+    console.log("Token end: " + tokenEnd + ", Start: " + start)
+    return {type: constParser.expressionFunctionDeclaration, functionName: functionName, functionTypeInt: functionTypeHint, functionArgs : arguments.args, start:start, end: tokenEnd};
 }
 
 

@@ -32,6 +32,7 @@ module.exports = (tokens) => {
             } else {
                 i = expression.variableValue.end;
             }
+            AST.pop();
             //utilisation de methode
         } else if (i < tokens.length - 1 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symbolePoint) {
             expression = factory.create(constParser.expressionMethodCall, tokens, i);
