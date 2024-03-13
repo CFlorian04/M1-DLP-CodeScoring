@@ -11,6 +11,13 @@ module.exports = (tokens) => {
             expression = factory.create(constParser.expressionDeclaration, tokens, i);
             i++;
             //utilisation symbole égale
+        } else if (tokens[i].type == constTokens.typeWord && constParser.declarationFunction.indexOf(tokens[i].value) != -1)
+        {
+            //console.log("--- Construction Fonctions ---")
+            expression = factory.create(constParser.expressionFunctionDeclaration, tokens, i)
+
+            i = expression.end;
+            
         } else if (tokens[i].type == constTokens.symboleEqual) {
             expression = factory.create(constParser.expressionAffectation, tokens, i);
             //si affectation nombre

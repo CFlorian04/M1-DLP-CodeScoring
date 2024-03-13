@@ -19,11 +19,8 @@ exports.from = (code) => {
             indentation: helper.indentation(ast)
         };
         return {
-            score: result.allDeclaredIsUsed +
-                result.allUsedIsDeclared +
-                result.allExpressionFinished +
-                result.indentation +
-                result.numberLine,
+            score:
+                result.allDeclaredIsUsed + result.allUsedIsDeclared + result.allExpressionFinished + result.indentation + result.numberLine,
             details: result
         }
     } catch (e) {

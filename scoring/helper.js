@@ -1,19 +1,30 @@
-exports.allDeclaredIsUsed = (ast)=> {
+const { forEach } = require("lodash");
+
+exports.allDeclaredIsUsed = (ast) => {
     return 1;
 }
 
-exports.allUsedIsDeclared = (ast)=> {
+exports.allUsedIsDeclared = (ast) => {
     return 1;
 }
 
-exports.allExpressionFinished = (ast)=> {
+exports.allExpressionFinished = (ast) => {
     return 1;
 }
 
-exports.indentation = (ast)=> {
+exports.indentation = (ast) => {
     return 1;
 }
 
-exports.numberLine = (ast)=> {
-    return 1;
+exports.numberLine = (ast) => {
+    
+    let nb = 1;
+    ast.forEach((e) => { 
+        if (e.type == 'newLine') {
+            console.log(e); 
+            nb++; 
+        }
+    });
+    
+    return nb;
 }
