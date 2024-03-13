@@ -6,7 +6,8 @@ exports.specialChars = {
     virgule:           {regRule: /\,/g, value:','},
     quotationMark:  {regRule: /\"/g, value:'"'},
     openParenthese:  {regRule: /\(/g, value:'"'},
-    closeParenthese:  {regRule: /\)/g, value:'"'}
+    closeParenthese:  {regRule: /\)/g, value:'"'},
+    indent:         {regRule: /    /g, value:'    '}
 };
 
 exports.symboleEqual            = "equal";
