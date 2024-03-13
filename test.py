@@ -1,4 +1,5 @@
 def testFunction() -> bool:
-    indentation_char = 'space'
-    indentation = 4
+    theme = "jungle"
+    ville = 'Paris'
+    temps = 4
     return True
