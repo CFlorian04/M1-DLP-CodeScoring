@@ -32,11 +32,20 @@ module.exports = (tokens) => {
             } else {
                 i = expression.variableValue.end;
             }
+            AST.pop();
             //utilisation de methode
         } else if (i < tokens.length - 1 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symbolePoint) {
             expression = factory.create(constParser.expressionMethodCall, tokens, i);
             i = expression.end;
+        // Appel de fonction
+        } else if (i < tokens.length - 2 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symboleOpenParenthese) {
+            expression = factory.create(constParser.expressionFunctionCall, tokens, i);
+        // Regroupement de commentaire
+        } else if (tokens[i].type == constTokens.symboleComment) {
+            expression = factory.create(constParser.expressionCommentNumber, tokens, i);
+            i = expression.end;
         }
+        
 
         if (expression) {
             AST.push(expression);

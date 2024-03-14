@@ -7,6 +7,8 @@ exports.expressionAffectation= "variableAffectation";
 exports.expressionFunctionDeclaration = "functionDeclaration";
 exports.expressionIndent = "indentNumber";
 exports.expressionMethodCall= "objectMethodCall";
+exports.expressionFunctionCall = "functionCall";
+exports.expressionCommentNumber = "commentNumber";
 
 exports.declarationVariable = ["var","let", "const"];
 exports.declarationFunction = ["def"];

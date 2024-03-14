@@ -9,10 +9,11 @@ exports.specialChars = {
     closeParenthese:    { regRule: /\)/g, value: '"' },
     indent:             { regRule: /    /g, value: '    ' },
     typeHint:           { regRule: /->/g, value: '->'},
-    colon:              { regRule: /:/g, value: ':'}
-    //functionDeclaration:{ regRule: /def/g, value: 'def'}
+    colon:              { regRule: /:/g, value: ':'}, 
+    comment:            { regRule: /#/g, value: '#'}
 };
 
+exports.symboleComment = "comment";
 exports.symboleEqual = "equal";
 exports.symbolePoint = "point";
 exports.symboleColon = "colon";
@@ -20,6 +21,7 @@ exports.symboleVirgule = "virgule";
 exports.symboleQuotationMark = "quotationMark";
 exports.symboleOpenParenthese = "openParenthese";
 exports.symboleCloseParenthese = "closeParenthese";
+exports.tokensNewLine = "newLine";
 
 exports.typeNumber = "number";
 exports.typeWord = "word";
