@@ -40,6 +40,7 @@ module.exports = (tokens) => {
         // Appel de fonction
         } else if (i < tokens.length - 2 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symboleOpenParenthese) {
             expression = factory.create(constParser.expressionFunctionCall, tokens, i);
+            i = expression.end;
         // Regroupement de commentaire
         } else if (tokens[i].type == constTokens.symboleComment) {
             expression = factory.create(constParser.expressionCommentNumber, tokens, i);
