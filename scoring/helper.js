@@ -25,5 +25,5 @@ exports.numberLine = (ast) => {
         }
     });
     
-    return nb;
+    return nb <= 200 ? 1 : 0;
 }
