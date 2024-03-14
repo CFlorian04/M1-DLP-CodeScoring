@@ -10,7 +10,7 @@ exports.from = (code) => {
     try {
         console.log("--------", "AST", "--------");
         let ast = parser(tokens);
-        console.log("ast :",ast);
+        console.log(ast);
         
         // Initialise result avec un objet vide
         let result = {
@@ -19,7 +19,7 @@ exports.from = (code) => {
 
         // Appelez les fonctions de helper.js pour remplir result.details
         result.details.allDeclaredIsUsed = helper.allDeclaredIsUsed(ast);
-        result.details.allUsedIsDeclared = helper.allUsedIsDeclared(tokens, result);
+        result.details.allUsedIsDeclared = helper.allUsedIsDeclared(tokens, ast);
         result.details.allExpressionFinished = helper.allExpressionFinished(ast);
         result.details.numberLine = helper.numberLine(ast);
         result.details.indentation = helper.indentation(ast);
