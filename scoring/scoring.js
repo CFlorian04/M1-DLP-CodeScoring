@@ -11,17 +11,27 @@ exports.from = (code) => {
         console.log("--------", "AST", "--------");
         let ast = parser(tokens);
         console.log(ast);
+        
+        // Initialise result avec un objet vide
         let result = {
-            allDeclaredIsUsed: helper.allDeclaredIsUsed(ast),
-            allUsedIsDeclared: helper.allUsedIsDeclared(ast),
-            allExpressionFinished: helper.allExpressionFinished(ast),
-            numberLine: helper.numberLine(ast),
-            indentation: helper.indentation(ast)
+            details: {}
         };
+
+        // Appelez les fonctions de helper.js pour remplir result.details
+        result.details.allDeclaredIsUsed = helper.allDeclaredIsUsed(ast);
+        result.details.allUsedIsDeclared = helper.allUsedIsDeclared(tokens, result);
+        result.details.allExpressionFinished = helper.allExpressionFinished(ast);
+        result.details.numberLine = helper.numberLine(ast);
+        result.details.indentation = helper.indentation(ast);
+
         return {
             score:
-                result.allDeclaredIsUsed + result.allUsedIsDeclared + result.allExpressionFinished + result.indentation + result.numberLine,
-            details: result
+                result.details.allDeclaredIsUsed + 
+                result.details.allUsedIsDeclared + 
+                result.details.allExpressionFinished + 
+                result.details.indentation + 
+                result.details.numberLine,
+            details: result.details
         }
     } catch (e) {
         throw e;
