@@ -8,8 +8,11 @@ exports.expressionFunctionDeclaration = "functionDeclaration";
 exports.expressionIndent = "indentNumber";
 exports.expressionMethodCall= "objectMethodCall";
 
-exports.declarationVariable = ["var","let", "const"];
+exports.declarationLoop = ["for", "while"]
+exports.declarationClass = ["class"]
 exports.declarationFunction = ["def"];
+exports.declarationVariable = ["var","let", "const"];
+exports.declarationCondition = ["if", "else", "elif"];
 
 exports.errorMissingOpenParenthesis = "Error: missing a open parenthesis";
 exports.errorMissingCloseParenthesis= "Error: missing a close parenthesis";
