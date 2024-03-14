@@ -1,3 +1,4 @@
+// Liste des caractères spéciaux
 exports.specialChars = {
     newLine:            { regRule: /\r\n/g, value: '\n' },
     //endInstruct:        { regRule: /;/g, value: ';' },

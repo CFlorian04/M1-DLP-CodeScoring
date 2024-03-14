@@ -1,7 +1,8 @@
 const constTokens= require("../tokenizer/constants");
 const constParser= require("./constants");
 
-const searchString= (tokens, start)=>{
+// Permet de définir les tokens composant un String
+exports.searchString= (tokens, start)=>{
     var string=[];
     let findend= false;
     let end= 0;
@@ -17,7 +18,6 @@ const searchString= (tokens, start)=>{
     if(!findend) throw constParser.errorMissingQuotationMark;
     return {type:constParser.typeString, value: string.join(' '), start: start, end: end};
 }
-exports.searchString = searchString;
 
 exports.searchArgs= (tokens, start)=>{
     if(tokens[start].type!=constTokens.symboleOpenParenthese) throw constParser.errorMissingOpenParenthesis;

@@ -6,37 +6,42 @@ module.exports = (tokens) => {
     let AST = [];
     for (let i = 0; i < tokens.length; i++) {
         let expression = null;
-        //déclaration de variable
-        if (tokens[i].type == constTokens.typeWord && constParser.declarationVariable.indexOf(tokens[i].value) != -1) {
+        //Nouvelle Ligne (prise en compte de l'indentation)
+        if (tokens[i].type == constTokens.tokensNewLine) {
+            expression = factory.create(constParser.expressionNewLine, tokens, i);
+            i = expression.end;
+        //Déclaration de variable
+        } else if (tokens[i].type == constTokens.typeWord && constParser.declarationVariable.indexOf(tokens[i].value) != -1) {
             expression = factory.create(constParser.expressionDeclaration, tokens, i);
             i++;
 
+        //Indentation (en dehors des nouvelles lignes)
         } else if (tokens[i].type == constTokens.typeIndent)
         {
             expression = factory.create(constParser.expressionIndent, tokens, i)
 
-            i = i + expression.quantity-1;
-        //Declaration de fonction
+            i = expression.end;
+        //Déclaration de fonction
         } else if (tokens[i].type == constTokens.typeWord && constParser.declarationFunction.indexOf(tokens[i].value) != -1)
         {
             expression = factory.create(constParser.expressionFunctionDeclaration, tokens, i)
             i = expression.end;
 
-        //utilisation symbole égale    
+        //Affectation de valeur ("=") 
         } else if (tokens[i].type == constTokens.symboleEqual) {
             expression = factory.create(constParser.expressionAffectation, tokens, i);
-            //si affectation nombre
+            //Si la valeur est un nombre
             if (expression.variableValue.type == constTokens.typeNumber) {
                 i++;
-                //si affectation string on reprend l'analyse après la fermeture des guillements.
+            //Si la valeur est un mot
             } else {
                 i = expression.variableValue.end;
             }
             AST.pop();
-            //utilisation de methode
-        } else if (i < tokens.length - 1 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symbolePoint) {
-            expression = factory.create(constParser.expressionMethodCall, tokens, i);
-            i = expression.end;
+        //Utilisation de méthode * Pas en python
+        // } else if (i < tokens.length - 1 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symbolePoint) {
+        //     expression = factory.create(constParser.expressionMethodCall, tokens, i);
+        //     i = expression.end;
         // Appel de fonction
         } else if (i < tokens.length - 2 && tokens[i].type == constTokens.typeWord && tokens[i + 1].type == constTokens.symboleOpenParenthese) {
             expression = factory.create(constParser.expressionFunctionCall, tokens, i);

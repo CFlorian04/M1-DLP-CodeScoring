@@ -5,10 +5,11 @@ exports.typeString= 'string';
 exports.expressionDeclaration= "variableDeclaration";
 exports.expressionAffectation= "variableAffectation";
 exports.expressionFunctionDeclaration = "functionDeclaration";
-exports.expressionIndent = "indentNumber";
+exports.expressionIndent = "indent";
 exports.expressionMethodCall= "objectMethodCall";
 exports.expressionFunctionCall = "functionCall";
 exports.expressionCommentNumber = "commentNumber";
+exports.expressionNewLine = "newLine";
 
 exports.declarationVariable = ["var","let", "const"];
 exports.declarationFunction = ["def"];

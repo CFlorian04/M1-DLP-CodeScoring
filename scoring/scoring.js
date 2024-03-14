@@ -4,13 +4,19 @@ const helper = require("./helper");
 
 exports.from = (code) => {
     console.log("--------", "Tokens", "--------");
+    // Création des tokens par rapport au code
     let tokens = tokenizer(code);
-    console.log(tokens);
+    console.log("Tokens length :", tokens.length, "tokens")
+    console.log("Tokens :", tokens);
 
     try {
         console.log("--------", "AST", "--------");
+        // Création de l'AST
         let ast = parser(tokens);
-        console.log(ast);
+        console.log("AST length :", ast.length, "tokens")
+        console.log("AST :", ast);
+
+        // Calcul des scores
         let result = {
             allDeclaredIsUsed: helper.allDeclaredIsUsed(ast),
             allUsedIsDeclared: helper.allUsedIsDeclared(ast),

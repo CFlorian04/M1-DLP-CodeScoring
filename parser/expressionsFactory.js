@@ -18,6 +18,8 @@ exports.create = (type, tokens, start) => {
             return expressionFunctionCall(tokens, start);
         case constParser.expressionCommentNumber:
             return expressionCommentNumber(tokens, start);
+        case constParser.expressionNewLine:
+            return expressionNewLine(tokens, start);
     }
 }
 
@@ -88,8 +90,6 @@ function expressionFunctionCall(tokens, start) {
     let arguments = helper.searchArgs(tokens, start + 1);
     startAndArg = start + 2 * arguments.args.length - 1;
 
-    console.log(tokens[startAndArg + 2].type, " / ", tokens[startAndArg + 2].value)
-
     if (tokens[startAndArg + 2].type != constTokens.symboleCloseParenthese) throw constParser.errorMissingCloseParenthesis;
 
     return { type: constParser.expressionFunctionCall, functionName: tokens[start].value, functionArgs: arguments, start: start, end: startAndArg + 2 }
@@ -109,4 +109,19 @@ function expressionCommentNumber(tokens, start) {
     }
 
     return { type: constTokens.symboleComment, quantity: NumberOfComment, start: start, end: EndComment };
+}
+
+function expressionNewLine(tokens, start) {
+    let countIndent = 0
+    let i = 1;
+
+    while(tokens[start+i].type == constTokens.typeIndent)
+    {
+        countIndent++;
+        i++;
+    }
+
+    let end = start + countIndent;
+
+    return { type: constTokens.tokensNewLine, indent: countIndent, start: start, end: end}
 }
