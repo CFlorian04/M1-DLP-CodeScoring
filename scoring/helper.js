@@ -9,15 +9,20 @@ exports.allUsedIsDeclared = (tokens, result) => {
     throw new Error("Invalid result object or missing details property");
   }
 
-  const tokenValues = tokens.map((token) => token.value); 
-  const resultValues = Object.values(result.details).reduce((acc, detail) => {
-    return acc.concat(Object.keys(detail));
-  }, []); 
+  const tokenValues = tokens.map((token) => token?.value); // Obtient les valeurs de chaque token
+  // console.log(tokenValues);
+  const variableValues = tokens
+    .filter(
+      (token) => token.type === "word" || token.type === "variableAffectation"
+    ) // Inclure également les affectations de variables
+    .map((token) => token.value);
 
-  
-  const allUsedIsDeclared = tokenValues.every((tokenValue) =>
-    resultValues.includes(tokenValue)
-  );
+  // console.log("variableValues :", variableValues);
+
+  // Vérifie si toutes les valeurs de variableValue sont présentes dans tokenValues
+  const allUsedIsDeclared = variableValues.every((variableValue) => {
+    return tokenValues.includes(variableValue);
+  });
 
   return allUsedIsDeclared ? 1 : 0;
 };

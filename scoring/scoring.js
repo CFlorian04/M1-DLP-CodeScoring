@@ -10,7 +10,7 @@ exports.from = (code) => {
     try {
         console.log("--------", "AST", "--------");
         let ast = parser(tokens);
-        console.log(ast);
+        console.log("ast :",ast);
         
         // Initialise result avec un objet vide
         let result = {
