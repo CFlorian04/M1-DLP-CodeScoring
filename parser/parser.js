@@ -26,7 +26,7 @@ module.exports = (tokens) => {
         } else if (tokens[i].type == constTokens.symboleEqual) {
             expression = factory.create(constParser.expressionAffectation, tokens, i);
             //si affectation nombre
-            if (expression.variableValue.type == constTokens.typeNumber) {
+            if (expression.variableValue.type == constTokens.typeNumber | expression.variableValue.type == constTokens.typeBoolean) {
                 i++;
                 //si affectation string on reprend l'analyse après la fermeture des guillements.
             } else {

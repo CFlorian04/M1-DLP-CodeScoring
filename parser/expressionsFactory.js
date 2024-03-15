@@ -50,7 +50,6 @@ function variableAffectation(tokens, start){
     } else if (tokens[start+1].type==constTokens.booleanValues.indexOf(tokens[start+1].value) != -1){
         variableValue = tokens[start+1];
         tokens[start-1].type = constTokens.typeVariable;
-
     }
     return {type: constParser.expressionAffectation, variableName: variableName, variableValue: variableValue};
 }

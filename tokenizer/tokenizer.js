@@ -17,8 +17,7 @@ module.exports = function(code) {
             
         //sinon c'est un mot
         } else if (helper.isBoolean(t)){
-          //console.log("TypeChar: " + typeChars + ', Valeur: ' + t + ', Boolean: ' + helper.isBoolean(t));
-          tokens.push({type: constTokens.typeBoolean, value: t});
+          tokens.push({type: constTokens.typeBoolean, value: t, start: i-2, end: i});
         }
         else{
             tokens.push({type: constTokens.typeWord, value: t})
