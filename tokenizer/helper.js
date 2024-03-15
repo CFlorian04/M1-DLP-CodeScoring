@@ -9,10 +9,17 @@ exports.checkChars= (t)=>{
     return false;
 }
 
+exports.isBoolean = (val)=>{
+    return constTokens.booleanValues.indexOf(val) != -1
+}
+
 exports.replaceSpecialsChars= (code)=>{
     for (const charName in constTokens.specialChars) {
         const element = constTokens.specialChars[charName];
-        code= code.replace(element.regRule, ' *'+charName+'* ');
+        if (element != constTokens.specialChars.boolean){
+            code= code.replace(element.regRule, ' *'+charName+'* ');
+        }
+        
     }
     return code;
 }

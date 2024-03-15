@@ -12,7 +12,7 @@ exports.declarationLoop = ["for", "while"]
 exports.declarationClass = ["class"]
 exports.declarationFunction = ["def"];
 exports.declarationVariable = ["var","let", "const"];
-exports.declarationCondition = ["if", "else", "elif"];
+exports.declarationCondition = ["if", "else", "elif", "not"];
 
 exports.errorMissingOpenParenthesis = "Error: missing a open parenthesis";
 exports.errorMissingCloseParenthesis= "Error: missing a close parenthesis";

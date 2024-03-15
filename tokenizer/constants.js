@@ -9,7 +9,7 @@ exports.specialChars = {
     closeParenthese:    { regRule: /\)/g, value: '"' },
     indent:             { regRule: /    /g, value: '    ' },
     typeHint:           { regRule: /->/g, value: '->'},
-    colon:              { regRule: /:/g, value: ':'}
+    colon:              { regRule: /:/g, value: ':'},
     //functionDeclaration:{ regRule: /def/g, value: 'def'}
 };
 
@@ -25,8 +25,9 @@ exports.typeNumber = "number";
 exports.typeWord = "word";
 exports.typeTypeHint= 'typeHint';
 exports.typeIndent= 'indent';
+exports.typeBoolean = "bool"
 
-
+exports.booleanValues = ["True", "False"];
 
 exports.errorNoTokenFound = 'No Tokens Found.';
 

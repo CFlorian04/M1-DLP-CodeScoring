@@ -24,6 +24,6 @@ exports.numberLine = (ast) => {
             nb++; 
         }
     });
-    
+    // 200: nombre de lignes maximal
     return nb <= 200 ? 1 : 0;
 }
