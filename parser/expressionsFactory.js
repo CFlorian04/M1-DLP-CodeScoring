@@ -36,9 +36,6 @@ function variableDeclaration(tokens, start){
 }
 
 function variableAffectation(tokens, start){
-    console.log("Affectation: " + tokens[start - 1].type);
-    console.log("Affectation: " + tokens[start].type);
-    console.log("Affectation: " + tokens[start + 1].type + ", value: " + tokens[start + 1].value);
     if(tokens[start-1].type != constTokens.typeWord) throw constParser.errorMissingWord;
     let variableName= tokens[start-1].value;
     let variableValue= null;
