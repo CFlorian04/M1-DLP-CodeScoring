@@ -9,13 +9,18 @@ module.exports = function(code) {
     for (var i = 0; i < _tokens.length; i++) {
       var t = _tokens[i]
       //si le token n'est pas un nombre
-      if(t.length <= 0 || isNaN(t)) {
-        //on check si c'est un caractère spéciale
+      if(t.length <= 0 || isNaN(t) ) {
+        //on check si c'est un caractère spécial
         let typeChars= helper.checkChars(t);
         if (typeChars){
-            tokens.push({type: typeChars})
+          tokens.push({type: typeChars})
+            
         //sinon c'est un mot
-        }else{
+        } else if (helper.isBoolean(t)){
+          //console.log("TypeChar: " + typeChars + ', Valeur: ' + t + ', Boolean: ' + helper.isBoolean(t));
+          tokens.push({type: constTokens.typeBoolean, value: t});
+        }
+        else{
             tokens.push({type: constTokens.typeWord, value: t})
         }
       //sinon c'est un nombre
