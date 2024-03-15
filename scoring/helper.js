@@ -29,7 +29,11 @@ exports.allExpressionFinished = (ast) => {
 };
 
 exports.indentation = (ast) => {
-  return 1;
+  const allIndentedProperly = ast.every((node) => {
+    return node.type !== "indentNumber" || (node.type === "indentNumber" && node.quantity > 1);
+  });
+
+  return allIndentedProperly ? 1 : 0;
 };
 
 exports.numberLine = (ast) => {
