@@ -30,7 +30,7 @@ exports.allExpressionFinished = (ast) => {
 
 exports.indentation = (ast) => {
   const allIndentedProperly = ast.every((node) => {
-    return node.type !== "indentNumber" || (node.type === "indentNumber" && node.quantity > 1);
+    return node.type !== "indentNumber" || (node.type === "indentNumber" && node.quantity >= 1);
   });
 
   return allIndentedProperly ? 1 : 0;
